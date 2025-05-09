@@ -7,19 +7,26 @@
     <body>
         <header>
             <img src="wanderlustlogo.png" alt="Logo for Wanderlust" id="logo">
-        <nav>
-            <ul>
-                <li><a href="travel_recommendation.html">Home</a></li>
+            <nav class="nav-container">
+                <ul>
+                    <li><a href="travel_recommendation.html">Home</a></li>
                     <li><a href="about_us.html">About Us</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-            <form action="#" method="GET" class="search-bar">
-                <input type="search" name="query" placeholder="Where are you headed?">
-                <input type="submit" value="Search">
-                <input type="reset" value="Clear">
-            </form>
-        </nav>
-    </header>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+                
+                <!-- SEARCH BAR -->
+                <form class="search-bar">
+                    <input type="text" name="query" placeholder="Where would you like to go?" required>
+                    <input type="submit" value="Search">
+                </form>
+            </nav>
+        </header>
+
+        <!--RESULTS CONTAINER-->
+        <main>
+            <section class="results-container" id="results"></section>
+        </main>
+        
         <!--SIDEBAR SOCIAL MEDIA ICONS-->
 <aside class="social-media">
     <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
