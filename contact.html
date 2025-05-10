@@ -2,26 +2,31 @@
 <html>
     <head>
         <link rel="stylesheet" href="styles.css">
+        <script src="travel_recommendation.js" defer></script>
 <title>Wanderlust</title>
     </head>
     <body>
         <header>
-            <img src="wanderlustlogo.png" alt="Logo for Wanderlust" id="logo">
-            <h1 class="site-title">Wanderlust</h1>
+            <img src="images/wanderlust-logo.png" alt="Logo for Wanderlust" id="logo">          
+          
             <nav class="nav-container">
                 <ul>
                     <li><a href="travel_recommendation.html" class="navlink">Home</a></li>
                     <li><a href="about_us.html" class="navlink">About Us</a></li>
                     <li><a href="contact.html" class="navlink">Contact Us</a></li>
                 </ul>
-                
-                <!-- SEARCH BAR -->
+            </nav>    
+        
+            <!-- 🔥 FIX: Search wrapper moved outside nav container -->
+            <div class="search-wrapper">
+                <button id="search-icon">🔍</button>
                 <form class="search-bar">
                     <input type="text" name="query" placeholder="Where would you like to go?" required>
-                    <input type="submit" value="Search">
-                </form>
-            </nav>
-        </header>
+                    <button type="submit" class="searchBtn">Search</button>
+                    <button type="button" id="clear-button">Clear</button>
+                </form>                    
+            </div>
+        </header>      
 
         <!--RESULTS CONTAINER-->
         <main>
@@ -29,27 +34,37 @@
         </main>
         
         <!--SIDEBAR SOCIAL MEDIA ICONS-->
-<aside class="social-media">
-    <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
-    <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-    <a href="#"><img src="insta-icon.png" alt="Instagram"></a>
-    <a href="#"><img src="youtube-icon.png" alt="Youtube"></a>
+<aside class="social-media-icons">
+    <a href="#"><img src="images/twitter-logo.png" alt="Twitter"></a>
+    <a href="#"><img src="images/facebook-logo.png" alt="Facebook"></a>
+    <a href="#"><img src="images/instagram-logo.png" alt="Instagram"></a>
+    <a href="#"><img src="images/youtube-logo.png" alt="Youtube"></a>
 </aside>
 
-<!--CONTACT SECTION-->
+<!-- CONTACT SECTION -->
 <section class="contact">
-    <h1>CONTACT US</h1>
+    <div class="contact-header-container">
+        <h1 class="contact-header">
+            <span class="contact-word">CONTACT</span> <span class="us-word">US</span>
+        </h1>        
+        <p class="contact-text">Get in touch with us!</p>
+    </div>
     <div class="contact-container">
-        <div class="contact-text">
-            <p>Get in touch with us!</p>
-        </div>
         <div class="contact-form">
             <form action="#" method="POST">
+                <label for="name">Name:</label>
                 <input type="text" name="name" placeholder="Enter your name">
+                
+                <label for="email">Email:</label>
                 <input type="email" name="email" placeholder="Enter your email">
-                <textarea name="message" placeholder="What can we help you with?">
-                    <input type="submit" value="Send Message">
-                </form>
-            </div>
+                
+                <label for="message">Your message:</label>
+                <textarea name="message" placeholder="What can we help you with?"></textarea>
+                
+                <input type="submit" value="Send Message">
+            </form>
         </div>
-    </section>
+    </div>
+</section>
+    </body>
+    </html>

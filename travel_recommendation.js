@@ -50,12 +50,14 @@ document.querySelector(".search-bar").addEventListener("submit", (event) => {
             console.log("JSON Data:", data);
 
             const allDestinations = [
-                ...(data.countries || []).map(country => ({
-                    name: country.name || "Unknown Country",
-                    description: country.description || "No description available",
-                    imageUrl: country.imageUrl || "default-image.jpg",
-                    type: "Country"
-                })),
+                ...(data.countries || []).flatMap(country => 
+                    country.cities.map(city => ({
+                        name: city.name || "Unknown City",
+                        description: city.description || "No description available",
+                        imageUrl: city.imageUrl || "default-image.jpg",
+                        type: "Country"
+                    }))
+                ),
                 ...(data.temples || []).map(temple => ({
                     name: temple.name || "Unknown Temple",
                     description: temple.description || "No description available",
@@ -90,4 +92,76 @@ document.querySelector(".search-bar").addEventListener("submit", (event) => {
             displayRecommendations(filteredResults);
         })
         .catch(error => console.error("Fetch Error:", error));
+});
+
+// Exiting the Recommendations 
+let resultsContainer = document.getElementById("results"); // ✅ Define it once globally
+
+document.addEventListener("click", (event) => {
+    if (!resultsContainer) {
+        console.error("Error: results does not exist.");
+        return;
+    }
+
+    let currentElement = event.target;
+    let insideContainer = false;
+
+    while (currentElement) {
+        if (currentElement === resultsContainer) {
+            insideContainer = true;
+            break;
+        }
+        currentElement = currentElement.parentElement;
+    }
+
+    if (!insideContainer) {  
+        resultsContainer.style.visibility = "hidden";  // 🔥 Use visibility instead of display
+        console.log("Results hidden successfully.");
+    }
+});
+
+// ✅ Ensure resultsContainer is visible before new searches
+document.querySelector(".search-bar").addEventListener("submit", (event) => {
+    event.preventDefault(); 
+
+    if (resultsContainer) {
+        resultsContainer.style.visibility = "visible"; // ✅ Make sure results can be seen
+    }
+
+    // Search logic continues...
+});
+
+
+
+// Search Bar Functionality
+document.addEventListener("DOMContentLoaded", function() {
+    let searchIcon = document.getElementById("search-icon");
+    let searchBar = document.querySelector(".search-bar");
+    let clearButton = document.getElementById("clear-button");
+
+    if (searchIcon && searchBar) {
+        searchIcon.addEventListener("click", function() {
+            searchBar.style.visibility = "visible";
+            searchBar.style.opacity = "1"; 
+            searchIcon.style.display = "none";  
+            clearButton.style.display = "inline-block";
+        });
+
+        document.addEventListener("click", function(event) {
+            let searchWrapper = document.querySelector(".search-wrapper");
+
+            if (!searchWrapper.contains(event.target)) {
+                searchBar.style.visibility = "hidden";
+                searchBar.style.opacity = "0"; 
+                searchIcon.style.display = "inline-block"; 
+                clearButton.style.display = "none";
+            }
+        });
+
+        clearButton.addEventListener("click", function() {
+            document.querySelector(".search-bar input[type='text']").value = ""; // Clears input
+        });
+    } else {
+        console.error("❌ search-icon or search-bar not found! Check HTML structure.");
+    }
 });
